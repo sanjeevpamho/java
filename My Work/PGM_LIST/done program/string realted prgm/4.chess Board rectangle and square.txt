@@ -1,0 +1,36 @@
+package selenium_testing;
+
+
+public class LinearSearch {
+
+	public static void main(String[] args) {
+		int a=8;
+		System.out.println("num Square Chess Board " +
+				numSquareChessBoard(a));
+		System.out.println("num of rectangle in chess board "+ numRectangleChessBoard(a+1));
+	}
+
+	static int numSquareChessBoard(int n){
+		int squareCount=(n*(n+1)*(2*n+1))/6;
+		return squareCount;
+	}
+	static int numRectangleChessBoard(int n){
+		
+		int rectangleCount=0;
+		
+		int totaln=1;
+		for(int i=1;i<=n;i++){
+			totaln=totaln*i;
+		}
+		System.out.println("totaln::"+totaln);
+		int totalnminustwo=1;
+		for(int i=1;i<=n-2;i++){
+			totalnminustwo=totalnminustwo*i;
+		}
+		
+		totalnminustwo=totalnminustwo*2;
+		
+		rectangleCount=(totaln/totalnminustwo)*(totaln/totalnminustwo);
+		return rectangleCount;
+	}
+}

@@ -1,0 +1,225 @@
+1.> program
+
+
+public class Foo {
+
+	public static void x(){
+		y();
+	}
+	
+	public static void y(){
+		System.out.println("foo");
+	}
+        public void z(){
+		System.out.println("foo in z");
+	}
+}
+
+
+public class Bar extends Foo{
+	public static void y(){
+		System.out.println("bar");
+	}
+        public void z(){
+		System.out.println("bar in z");
+	}
+
+}
+
+
+
+public class Footest {
+
+	public static void main(String[] args) {
+           Bar.x();
+           Bar bar=new Bar();
+           bar.y();
+           Foo foo=new Bar();
+           foo.y();
+           foo.z();
+	}
+
+}
+
+
+
+
+o/p::
+
+foo
+bar
+foo
+bar in z
+====================================
+2.>Program
+imp.....
+
+public class Footest {
+
+	// static Integer i1=10;
+        // static int i2=10;
+	public static void inc(Integer input){
+		input++;
+		
+	}
+	public static void main(String[] args) {
+       Integer i1=10;
+        int i2=10;
+        
+        inc(i1);
+        inc(i2);
+        
+        System.out.println(i1);
+        System.out.println(i2);
+           
+	}
+
+}
+
+o/p::
+
+10
+10
+===================================
+3.>Program  reverse of array
+
+
+import java.io.*;
+
+class GFG {
+	public static void reverse(int[] arr,int start,int end){
+						
+		if(start>=end){
+			return;
+		}
+		
+		int temp=arr[start];
+		arr[start]=arr[end];
+		arr[end]=temp;
+		reverse(arr, start+1, end-1);
+	}
+	
+	/*
+	int k = arr.length;
+		for(int i=0; i<arr.length/2; i++){
+
+			int temp = arr[k-1];
+			arr[k-1] = arr[i];
+			arr[i] = temp;
+			k--;
+
+		}
+
+	*/
+	
+	private Integer i1;
+	public static void main (String[] args) {
+	
+		int[] arr={15,20,30,40,50,60};
+		
+		int size=arr.length;
+		printArray(arr, size);
+		reverse(arr,0,arr.length-1);
+		printArray(arr, size);
+		
+	}
+	static void printArray(int arr[], int size)
+    {
+        for (int i=0; i < size; i++)
+            System.out.print(arr[i] + " ");
+        System.out.println("");
+    }
+ 
+}
+
+==============================================================================
+4.> Program for shifting
+
+4.1>
+
+import java.io.*;
+import java.util.Arrays;
+
+class GFG {
+	public static void rotate(int[] arr,int d,int size){
+		int[] tmp=Arrays.copyOfRange(arr, 0, d);
+		int[] shiftedarr=Arrays.copyOfRange(arr, d, size);
+	
+		int i;
+		for( i=0;i<shiftedarr.length;i++){
+			arr[i]=shiftedarr[i];
+		}
+		for(int j=0;j<tmp.length;j++){
+			arr[i++]=tmp[j];
+		}
+		System.out.println("hi");
+	
+		for (int m=0; m < size; m++){
+			System.out.print(arr[m] + " ");
+		}
+		System.out.println();
+	}
+
+
+	public static void main (String[] args) {
+
+		int[] arr={15,20,30,40,50,60};
+
+		int size=arr.length;
+		printArray(arr, size);
+		rotate(arr,2,arr.length);
+		printArray(arr, size);
+
+	}
+	static void printArray(int arr[], int size)
+	{
+		for (int i=0; i < size; i++)
+			System.out.print(arr[i] + " ");
+		System.out.println("");
+	}
+
+}
+-----------------------------------------------------------------
+4.2>
+
+class RotateArray 
+{
+    /*Function to left rotate arr[] of size n by d*/
+    void leftRotate(int arr[], int d, int n) 
+    {
+        int i;
+        for (i = 0; i < d; i++)
+            leftRotatebyOne(arr, n);
+    }
+ 
+    void leftRotatebyOne(int arr[], int n) 
+    {
+        int i, temp;
+        temp = arr[0];
+        for (i = 0; i < n - 1; i++)
+            arr[i] = arr[i + 1];
+        arr[i] = temp;
+    }
+ 
+    /* utility function to print an array */
+    void printArray(int arr[], int size) 
+    {
+        int i;
+        for (i = 0; i < size; i++)
+            System.out.print(arr[i] + " ");
+    }
+ 
+    // Driver program to test above functions
+    public static void main(String[] args) 
+    {
+        RotateArray rotate = new RotateArray();
+        int arr[] = {1, 2, 3, 4, 5, 6, 7};
+        rotate.leftRotate(arr, 2, 7);
+        rotate.printArray(arr, 7);
+    }
+}
+
+==========================================
+4.3>
+
+

@@ -1,0 +1,498 @@
+1.>String pallindrome
+
+import java.util.Scanner;
+
+public class CheckPallaindrome {
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.print("\n enter string to check : ");
+		String str = sc.next();
+		boolean isPallaindrome = true;
+		
+		char[] arr = str.toCharArray();
+		int n = arr.length;
+		for(int i=0; i<n/2; i++){
+			if(!(arr[i]==arr[n-i-1])){
+				isPallaindrome = false;
+				break;
+			}
+		}
+
+		if(isPallaindrome)
+			System.out.println(str+" is Pallaindrome");
+		else
+			System.out.println(str+" is not Pallaindrome");
+	}
+
+}
+
+=================================================================
+
+2.>Funny string
+/*
+ * 
+ * Suppose you have a String, S , of length N that is indexed from 0 to N-1. You also have some String, R , that is the reverse of String S.
+ * S is funny if the condition |S[i]-S[i-1]| = |R[i]-R[i-1]|is true for every character i  from 1 to N-1.
+
+Input:
+2
+acxz
+bcxz
+
+Output:
+Funny
+Not Funny
+
+*/
+package way.to.go.commonProblems;
+
+import java.util.Scanner;
+
+public class FunnyString {
+
+	public static void main(String[] args) {
+
+		Scanner in = new Scanner(System.in);
+		int n = in.nextInt();
+		in.nextLine();
+
+		for(int j=0; j<n; j++){
+			boolean isFunny = true;
+			String str = in.nextLine();
+
+			for(int i=0; i<str.length()-1; i++){
+
+				if(Math.abs(str.charAt(i)-str.charAt(i+1)) == Math.abs(str.charAt(str.length()-i-1)-str.charAt(str.length()-i-2))){
+					continue;
+				}else{ 
+					isFunny = false;
+					break;
+				}
+			}
+			if(isFunny)
+				System.out.println("Funny"); 
+			else
+				System.out.println("Not Funny"); 
+
+		}
+
+	}
+
+}
+============================
+3.>anagram check
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class CheckAnagrams {
+
+	public static void main(String[] args) {
+		
+                //listen   and silent
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Enter original string : ");
+		String orignalStr = sc.next();
+		orignalStr = orignalStr.replaceAll("\\s", "");
+		
+		System.out.println("Enter string to check for anagram : ");
+		String anagramStr = sc.next();
+		anagramStr = anagramStr.replaceAll("\\s", "");
+		
+		boolean isAnagram=true;
+		
+		if(orignalStr.length() != anagramStr.length())
+			isAnagram = false;
+		else{
+			char[] orignalStrArr = orignalStr.toLowerCase().toCharArray();
+			Arrays.sort(orignalStrArr);
+			char[] anagramStrArr = anagramStr.toLowerCase().toCharArray();
+			Arrays.sort(anagramStrArr);
+			
+			isAnagram = Arrays.equals(orignalStrArr, anagramStrArr);
+		}
+		
+		if(isAnagram){
+			System.out.println("Anagrams");
+		}else{
+			System.out.println("Not Anagrams");
+		}
+		
+	}
+
+}
+==============================================
+4.>alternating character
+
+/*
+ *  Shashank likes strings in which consecutive characters are different. For example, he likes ABABA, while he doesn't like ABAA.
+ *  Given a string containing characters A and B only, he wants to change it into a string he likes.
+ *  To do this, he is allowed to delete the characters in the string.
+
+    Your task is to find the minimum number of required deletions.
+    
+Input : 
+
+5
+AAAA
+BBBBB
+ABABABAB
+BABABA
+AAABBB
+
+Output:
+
+3
+4
+0
+0
+4
+
+*/
+package way.to.go.commonProblems;
+
+import java.util.Scanner;
+
+public class AlternatingCharacters {
+
+	public static void main(String[] args) {
+		
+		 Scanner in = new Scanner(System.in);
+	     int n = in.nextInt();
+	     
+	     for(int j=0; j<n; j++){
+	    	 String str = in.next();
+	    	 int cnt=0;
+
+	    	 for(int i=0; i<str.length()-1; i++){
+	    		 if(str.charAt(i)==str.charAt(i+1))
+	    			 cnt++;
+	    	 }
+
+	    	 System.out.println("cnt : "+cnt);
+	     }
+		
+	}
+
+}
+=============================================
+5.>pangrams
+
+/*Roy wanted to increase his typing speed for programming contests. So, his friend advised him to type the sentence 
+ * "The quick brown fox jumps over the lazy dog" repeatedly, because it is a pangram.
+ *  (Pangrams are sentences constructed by using every letter of the alphabet at least once.)
+
+After typing the sentence several times, Roy became bored with it. So he started to look for other pangrams.
+
+Given a sentence , tell Roy if it is a pangram or not.
+
+Input #1 : We promptly judged antique ivory buckles for the next prize
+Output #1 : pangram
+
+Input #2 : We promptly judged antique ivory buckles for the prize
+Output #2 : not pangram
+
+*/package way.to.go.commonProblems;
+
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class PangramString {
+
+	public static void main(String[] args) {
+		
+		 Scanner in = new Scanner(System.in);
+	     String s = in.nextLine().toUpperCase();
+	     s=s.replaceAll("\\s", "");
+	     char[] arr = s.toCharArray();
+	     Arrays.sort(arr);
+	     
+	     int cmp=65;
+
+	     int i=0;
+	     for(; i<arr.length-1; i++){
+	    	 System.out.println("--------"+arr[i]+" "+arr[i+1]);
+	    	 if(arr[i]==arr[i+1]){
+	    		 continue;
+	    	 }
+	    	 else{
+	    		 if(arr[i]!=(char)cmp){
+	    			 break;
+	    		 }
+	    		 else{
+	    			 cmp++;
+	    		 }
+	    	 }
+	    	 
+	    	 if(cmp==90)
+	    		 break;
+	     }
+	    
+	       if(cmp==90)
+	    	   System.out.println("pangram"); 
+	       if(cmp!=90) 
+	         System.out.println("not pangram");
+		
+	}
+
+}
+================================================================
+6.>
+* Given a sorted array of positive integers, rearrange the array alternately 
+ * i.e first element should be maximum value, second minimum value, third second max, fourth second min and so on.
+ * Examples: Input : arr[] = {1, 2, 3, 4, 5, 6, 7} Output : arr[] = {7, 1, 6, 2, 5, 3, 4}
+
+*/
+
+import java.util.Arrays;
+ 
+public class GFG
+{
+    // Prints max at first position, min at second position
+    // second max at third position, second min at fourth
+    // position and so on.
+    static void rearrange(int[] arr, int n)
+    {
+        // Auxiliary array to hold modified array
+        int temp[] = new int[n];
+     
+        // Indexes of smallest and largest elements
+        // from remaining array.
+        int small=0, large=n-1;
+     
+        // To indicate whether we need to copy rmaining
+        // largest or remaining smallest at next position
+        boolean flag = true;
+     
+        // Store result in temp[]
+        for (int i=0; i<n; i++)
+        {
+            if (flag)
+                temp[i] = arr[large--];
+            else
+                temp[i] = arr[small++];
+     
+            flag = !flag;
+        }
+     
+        // Copy temp[] to arr[]
+        arr = temp.clone();
+    }
+ 
+    // Driver method to test the above function
+    public static void main(String[] args) 
+    {
+        int arr[] = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9};
+         
+        System.out.println("Original Array ");
+        System.out.println(Arrays.toString(arr));
+         
+        rearrange(arr,arr.length);
+         
+        System.out.println("Modified Array ");
+        System.out.println(Arrays.toString(arr));
+     
+    }
+}
+
+====================
+OR
+====================
+10.>first element should be maximum value, second minimum value, third second max, fourth second min and so on.
+ * Examples: Input : arr[] = {1, 2, 3, 4, 5, 6, 7} Output : arr[] = {7, 1, 6, 2, 5, 3, 4}
+
+class GFG
+{
+	public static void main(String args[]) throws IOException
+	{
+		int arr[] ={1, 2, 3, 4, 5, 6, 7,8,9};
+
+		int size =arr.length;
+		int newArr[]=new int[size];
+
+		int index=0;
+		int left=0;
+		int right=size-1;
+		
+		while(left<right){
+			
+			newArr[index++]=arr[right--];
+			newArr[index++]=arr[left++];
+			//left++;
+			//right--;
+		}
+
+		if(size%2==1)
+		{
+			newArr[size-1]=arr[(size/2)];
+		}
+		
+		for(int i=0;i<newArr.length;i++){
+			System.out.println(" "+newArr[i]);
+		}
+	}
+}
+==========
+1 more solution
+
+void rearrange(int arr[], int n)
+{
+    // initialize index of first minimum and first
+    // maximum element
+    int max_idx = n-1 , min_idx = 0 ;
+ 
+    // store maximum element of array
+    int max_elem = arr[n-1] + 1 ;
+ 
+    // traverse array elements
+    for (int i=0; i < n ; i++)
+    {
+        // at even index : we have to put maximum element
+        if (i % 2 == 0)
+        {
+            arr[i] += (arr[max_idx] % max_elem ) * max_elem;
+            max_idx--;
+        }
+ 
+        // at odd index : we have to put minimum element
+        else
+        {
+            arr[i] += (arr[min_idx] % max_elem ) * max_elem;
+            min_idx++;
+        }
+    }
+ 
+    // array elements back to it's original form
+    for (int i = 0 ; i < n; i++)
+        arr[i] = arr[i] / max_elem ;
+}
+ 
+// Driver program to test above function
+int main()
+{
+    int arr[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    int n = sizeof(arr)/sizeof(arr[0]);
+ 
+    cout << "Original Arrayn";
+    for (int i=0; i<n; i++)
+        cout << arr[i] << " ";
+ 
+    rearrange(arr, n);
+ 
+    cout << "nModified Arrayn";
+    for (int i=0; i<n; i++)
+        cout << arr[i] << " ";
+    return 0;
+}
+===================================================
+7.>reverse array
+
+
+public class GFG
+{
+	public static void main(String[] args) 
+	{
+		int[] arr = new int[]{1,2,3,4,5,6,7,8,9};
+
+		int k = arr.length;
+		for(int i=0; i<arr.length/2; i++){
+
+			int temp = arr[k-1];
+			arr[k-1] = arr[i];
+			arr[i] = temp;
+			k--;
+		}
+		System.out.println();
+
+		for(int i=0; i<arr.length; i++){
+
+			System.out.print(arr[i]+" ");
+		}
+	}
+}
+
+==================================================
+8.>reverse array in subset
+
+import java.util.Scanner;
+
+public class ReverseArrayInSubsets {
+
+	public static void main(String[] args) {
+
+		int[] arr = new int[]{1,2,3,4,5,6,7,8,9,10,11,12};
+
+		Scanner sc = new Scanner(System.in);
+		System.out.println("\n enter count to reverse array : ");
+		int count = sc.nextInt();
+		sc.close();
+
+
+		for(int i=0; i<arr.length; i=i+count){
+			int k = count;
+
+			if(i+k > arr.length){
+				break;
+			}
+
+			for(int j=0; j<k/2 ; j++){
+				int temp = arr[i+k-1-j];
+				arr[i+k-1-j] = arr[i+j];
+				arr[i+j] = temp;
+				k--;
+			}
+
+		}
+
+		System.out.println();
+
+		for(int i=0; i<arr.length; i++){
+
+			System.out.print(arr[i]+" ");
+		}
+
+	
+	}
+
+}
+=================================================
+9.>segregation of 1's and 0's
+
+class GFG
+{
+	public static void main(String args[]) throws IOException
+	{
+		int arr[] ={1,0,0,1,0,1,1,1,0,1};
+		int t=arr.length;
+
+
+		int left=0;
+		int right=t-1;
+
+		while(left < right){
+
+			while(arr[left]==0 && left<right){
+				left++;
+			}
+			while(arr[right]==1){
+				right--;
+			}
+			
+			if(left<right){
+				int k=arr[left];
+				arr[left]=arr[right];
+				arr[right]=k;
+			}
+		}
+ 
+		System.out.println();
+		for(int i=0;i<arr.length;i++){
+			System.out.println(arr[i]);
+		}
+	}
+}
+=================================================

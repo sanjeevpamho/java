@@ -1,0 +1,112 @@
+
+package code.bind;
+import java.io.*;
+import java.util.Arrays;
+import java.util.HashMap;
+
+import org.openqa.selenium.internal.FindsByXPath; 
+
+
+
+public class Test   { 
+	public static void main (String[] args)  
+	{
+		/*
+		int[] arr={8,5,9,9,9,9,4,4,4,3,3,2,2,2,2,2,1,1};
+		sort(arr, arr.length);
+		 */
+		 String str = "geeksforgeeks"; 
+	        int index =  firstNonRepeating(str); 
+	          
+	        System.out.println(index == -1 ? "Either all characters are repeating or string " + 
+	                   "is empty" : "First non-repeating character is " +  str.charAt(index)); 
+	    
+		
+	} 
+	
+	
+	public static int firstNonRepeating(String str){
+		char[] charArr=new char[256];
+		
+		for(int i=0;i<str.length();i++){
+			charArr[str.charAt(i)]++;
+		}
+		int index=-1;
+		for(int i=0;i<str.length();i++){
+			if(charArr[str.charAt(i)]==1){
+				index=i;
+				break;
+			}
+		}
+		
+		return index;
+	}
+		
+} 
+
+=====================
+or  --if string have millions of letters long with an alphabet of just 4 letters. What happens if the non-repeater is at the end of the string? Then we would have to scan for a long time (again).
+=====================
+
+package code.bind;
+import java.io.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
+import org.openqa.selenium.internal.FindsByXPath; 
+
+class CountIndex{
+	int index,count;
+	CountIndex(int index){
+		this.index=index;
+		count=1;
+	}
+	void incCount(){
+		this.count++;
+	}
+}
+
+public class Test   { 
+	public static void main (String[] args)  
+	{
+		/*
+		int[] arr={8,5,9,9,9,9,4,4,4,3,3,2,2,2,2,2,1,1};
+		sort(arr, arr.length);
+		 */
+		 String str = "geeksforgeeks"; 
+	        int index =  firstNonRepeating(str); 
+	          
+	        System.out.println(index == -1 ? "Either all characters are repeating or string " + 
+	                   "is empty" : "First non-repeating character is " +  str.charAt(index)); 
+	    
+		
+	} 
+	
+	
+	public static int firstNonRepeating(String str) {
+		
+		HashMap<Character, CountIndex> hm=new HashMap<Character, CountIndex>(256);
+		
+		for(int i=0;i<str.length();i++){
+			if(hm.containsKey(str.charAt(i))){
+				hm.get(str.charAt(i)).incCount();
+			}
+			else
+				hm.put(str.charAt(i), new CountIndex(i));
+		}
+		int index=Integer.MAX_VALUE;
+		
+	
+		
+		for(Character character:hm.keySet()){
+		   if(hm.get(character).count==1 &&  hm.get(character).index < index){
+			   index=hm.get(character).index;
+		   }
+		}
+		
+		return index;
+	}
+
+} 

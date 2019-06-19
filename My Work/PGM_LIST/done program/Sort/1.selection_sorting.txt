@@ -1,0 +1,48 @@
+package selenium_testing;
+
+import java.util.ArrayList;
+public class Test_Selenium {
+
+//selection sorting
+
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		int[] myList = {10, 25, 20, 13,11};
+
+		// Print all the array elements
+		for (int i = 0; i < myList.length; i++) {
+			System.out.println(myList[i] + " ");
+		}
+
+		selSort(myList,5);
+
+		System.out.println("Final Output");
+		
+		for (int i = 0; i < myList.length; i++) {
+			System.out.println(myList[i] + " ");
+		}
+	}
+
+	public static void selSort(int myList[],int n){
+		int i,j,t;
+		for(i=0;i<n-1;i++){
+			for(j=i+1;j<n;j++){
+				if(myList[i]>myList[j]){
+					t=myList[i];
+					myList[i]=myList[j];
+					myList[j]=t;
+				}
+			}
+			System.out.println("After pass"+(i+1));
+			
+			for (int k = 0; k < myList.length; k++) {
+				System.out.print(myList[k] + " ");
+			}
+			System.out.println();
+
+		}
+
+	}
+}
+
+

@@ -1,0 +1,71 @@
+package selenium_testing;
+
+import java.util.ArrayList;
+
+
+public class Test_Selenium {
+
+	//merge sorting
+
+	public static void main (String[] args) throws java.lang.Exception
+	{
+		
+		System.out.println("Merge Sorting");
+		
+		int[] myList = {20, 10, 90, 23,5,16};
+
+
+		// Print all the array elements
+		for (int i = 0; i < myList.length; i++) {
+			System.out.print(myList[i] + " ");
+		}
+		System.out.println();
+		partition(myList, myList.length, 0, myList.length-1);
+		System.out.println("Final Output");
+		for (int i = 0; i < myList.length; i++) {
+			System.out.print(myList[i] + " ");
+		}
+	}
+
+	public static void partition(int myList[],int n,int s,int e){
+		int m;
+		if(s<e){
+			m=(s+e)/2;
+			partition(myList,n,s,m);
+			partition(myList,n,m+1,e);
+			merge(myList,n,s,m,e);
+		}
+	}
+	public static void merge(int a[],int n,int s,int m,int e){
+
+		int[] b= new int[n];
+		int i,j,k;
+
+		i=s;j=m+1;k=s;
+		while(i<=m && j<=e){
+
+			if(a[i]<=a[j]){
+				b[k]=a[i];
+				i++;k++;
+			}
+			else{
+				b[k]=a[j];
+				j++;k++;
+			}
+		}	
+		while(j<=e){
+			b[k]=a[j];
+			j++;k++;
+		}
+		while(i<=m){
+			b[k]=a[i];
+			i++;k++;
+		}
+
+		for(i=s;i<=e;i++){
+			a[i]=b[i];
+		}
+	}
+}
+
+

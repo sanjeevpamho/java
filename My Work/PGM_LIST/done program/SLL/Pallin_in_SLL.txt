@@ -1,0 +1,92 @@
+package code.bind;
+
+import java.util.*; 
+import java.util.LinkedList;
+import java.util.Map.Entry;
+class GFG 
+{
+
+	Node head;
+	Node slow_ptr,fast_ptr,second_half;
+
+	boolean isPallindrome(Node head){
+		slow_ptr=head; fast_ptr=head;
+		Node prev_of_slow_ptr = head; 
+		Node midnode = null;
+		boolean res = true;
+
+		if(head !=null && head.next !=null){
+
+			while(fast_ptr !=null && fast_ptr.next !=null){
+				prev_of_slow_ptr=slow_ptr;
+				slow_ptr=slow_ptr.next;
+				fast_ptr=fast_ptr.next.next;
+			}
+
+			if(fast_ptr!=null){
+				midnode=slow_ptr;
+				slow_ptr=slow_ptr.next;
+			}
+			second_half=slow_ptr;
+			prev_of_slow_ptr.next=null;
+			
+			reverse();  // Reverse the second half 
+            res = compareLists(head, second_half); // compare 
+		}
+		return res;
+	}
+	private boolean compareLists(Node head, Node second_half) {
+		Node temp1=head;
+		Node temp2=second_half;
+		while(temp1 !=null && temp2 !=null){
+			if(temp1.data == temp2.data){
+				temp1=temp1.next;
+				temp2=temp2.next;
+			}
+			else
+				return false;
+		}
+		 if (temp1 == null && temp2 == null) 
+	            return true; 
+		 
+		return false;
+	}
+	public void reverse(){
+		Node prev=null;
+		Node currentNode=second_half;
+		Node next;
+		while(currentNode !=null){
+			next=currentNode.next;
+			currentNode.next=prev;
+			prev=currentNode;
+			currentNode=next;
+
+		}
+		second_half=prev;
+
+	}
+
+	public static void main(String[] args) {
+		GFG gfg=new GFG();
+	//	gfg.push(10);gfg.push(20);gfg.push(30);gfg.push(40);gfg.push(30);gfg.push(20);gfg.push(10);
+		gfg.push(10);gfg.push(20);gfg.push(30);gfg.push(30);gfg.push(20);gfg.push(10);
+		gfg.printList();
+		System.out.println();
+		System.out.println(gfg.isPallindrome(gfg.head));
+
+	}
+	public void push(int data){
+		Node newNode=new Node(data);
+		newNode.next=head;
+		head=newNode;
+	}
+	public void printList(){
+		Node temp =head;
+		System.out.println();
+
+		while(temp !=null){
+			System.out.print(" -> "+temp.data);
+			temp=temp.next;
+		}
+	}
+} 

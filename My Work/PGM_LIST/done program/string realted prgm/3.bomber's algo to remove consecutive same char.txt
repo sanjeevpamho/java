@@ -1,0 +1,79 @@
+//removing same consecutive char from string
+
+import java.util.Scanner;
+
+public class BombingClass {
+    public static void main(String args[])
+    {
+    	System.out.println("Please enter the input::");
+       Scanner sc=new Scanner(System.in);
+       String input =sc.nextLine();
+       System.out.println("input length is::"+input.length());
+       String output = "";
+       char prevchar = input.charAt(0);
+       for(int i  = 0 ; i < input.length()   ; )
+       {
+    	   System.out.println("i::"+i);
+
+              char outputlastchar = ' ';
+              if(output.length() > 0)
+              {
+                    outputlastchar =  output.charAt(output.length()-1);
+              }
+
+              if( i == input.length() -1 )
+              {
+                    if(outputlastchar != input.charAt(i))
+                    {
+                           output +=input.charAt(i);
+                    }
+                    else
+                    {
+                           if(output.length() > 0)
+                           {
+                                  output = output.substring(0,output.length()-1);
+                           }
+                    }
+                    break;
+              }
+
+              if((input.charAt(i) == input.charAt(i+1)) )
+              {
+                    int j = i;
+
+                    while(j< input.length() && input.charAt(j) == input.charAt(i))
+                    {
+                           j++;
+                    }
+                    i=j;
+                  //  prevchar = input.charAt(j-1);
+                 //   System.out.println("i:::"+i);
+              }
+              else if(   input.charAt(i) == outputlastchar )
+              {
+
+                    if(output.length() > 0)
+                    {
+                           output = output.substring(0,output.length()-1);
+                    }
+
+                //    prevchar = input.charAt(i);
+                    i++;
+                 System.out.println("hiiiiii");
+              }
+              else
+              {
+                    output +=input.charAt(i);
+                //    prevchar = input.charAt(i);
+                    i++;
+
+              }
+
+       }
+
+       System.out.println("output:"+output);
+    }
+}
+
+
+//abcdeedcbfgf

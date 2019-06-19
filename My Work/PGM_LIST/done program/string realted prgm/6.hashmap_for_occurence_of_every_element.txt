@@ -1,0 +1,39 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Scanner;
+import java.util.Set;
+
+public class GFG{
+	public static void countOfEveryElement(int[] arr){
+		HashMap<Integer, Integer> hm=new HashMap<Integer,Integer>();
+		
+		for(Integer ele : arr){
+			
+			if(hm.containsKey(ele)){
+				hm.put(ele, hm.get(ele)+1);
+			}
+			else{
+				hm.put(ele, 1);
+			}
+		}
+	
+		Set<Integer> key =hm.keySet();
+		List<Integer> sortedList=new ArrayList<Integer>(key);
+		Collections.sort(sortedList);
+		
+		for(int k :sortedList){
+			System.out.println("count of "+k+"::"+hm.get(k));
+		}
+	}
+	public static void main(String[] args) {
+		
+		int[] arr={10,12,13,10,13,12,14,15,17,16,15,18,17,10};
+		System.out.println();
+		
+		countOfEveryElement(arr);
+		
+	}
+	
+}

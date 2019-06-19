@@ -1,0 +1,61 @@
+public class GFG {
+
+	//quick sorting
+
+	public static void main (String[] args)
+	{
+		int[] myList = {20, 10, 110,90, 23,5,16,8};
+		
+
+		System.out.println("length is"+myList.length);
+		
+		// Print all the array elements
+		for (int i = 0; i < myList.length; i++) {
+			System.out.print(myList[i] + " ");
+		}
+		System.out.println();
+		quickSort(myList,myList.length,0,(myList.length-1));
+
+		System.out.println("Final Output");
+
+		for (int i = 0; i < myList.length; i++) {
+			System.out.print(myList[i] + " ");
+		}
+	}
+
+	private static void quickSort(int[] arr, int length, int l, int highest) {
+		int pivot=arr[l];
+		int down=l+1;;
+		int up=highest;
+		while(down<=up){
+			while( down<=up && arr[down]<= pivot   ){
+				down++;
+			}
+			while(arr[up]>pivot){
+				up--;
+			}
+			if(down<=up){
+				int temp=arr[down];
+				arr[down]=arr[up];
+				arr[up]=temp;
+				down++;up--;
+			}
+		}
+		arr[l]=arr[up];
+		arr[up]=pivot;
+		if(l<up-1){
+           quickSort(arr, length, l, up-1);
+		}
+		if(down<highest){
+			quickSort(arr, length, down, highest);
+		}
+	}
+}
+
+
+/*
+Worst Case:n^2
+Best Case: The best case occurs when the partition process always picks the middle element as pivot.  : nlogn
+Average Case:: nlogn
+
+*/

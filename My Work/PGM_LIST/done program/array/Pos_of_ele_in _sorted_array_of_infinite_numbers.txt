@@ -1,0 +1,47 @@
+package code.bind;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Scanner;
+
+public class GFG {
+
+	//Let low be pointing to 1st element and high pointing to 2nd element of array, Now compare key with high index element,
+	//if it is greater than high index element then copy high index in low index and double the high index.
+	//if it is smaller, then apply binary search on high and low indices found.
+	public static int findPos(int[] arr, int key){
+
+		int l=0;
+		int h=1;
+		while(arr[h]<key){
+			l=h;
+			h=2*h;		
+		}
+
+		return binarySearch(arr, l, h, key);
+	}
+	public static int binarySearch(int[] arr,int l,int r,int x){
+
+		if(r>=l){
+			int m=(l+r)/2;
+			if(arr[m]==x)
+				return m;
+			if(arr[m]>x)
+				return binarySearch(arr, l, m-1, x);
+
+			return binarySearch(arr, m+1, r, x);
+		}
+		return -1;
+	}
+
+	public static void main(String args[]){
+		int arr[] = new int[]{3, 5, 7, 9, 10, 90,100, 130, 140, 160, 170}; 
+		int ans = findPos(arr,140); 
+
+		if (ans==-1) 
+			System.out.println("Element not found"); 
+		else
+			System.out.println("Element found at index " + ans); 
+	}
+}
